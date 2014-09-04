@@ -4,10 +4,10 @@ require 'pry'
 class Game
   def initialize
     @game = Deck.new
-    @game.player_hit
-    @game.player_hit
-    @game.dealer_hit
-    @game.dealer_hit
+    @game.hit(@game.player)
+    @game.hit(@game.player)
+    @game.hit(@game.dealer)
+    @game.hit(@game.dealer)
   end
 
   def player_turn
@@ -17,7 +17,11 @@ class Game
     while true
       a = gets.chomp
       if a.upcase == "H"
-        @game.player_hit
+        @game.hit(@game.player)
+         if @game.score_calculator(@game.player) > 21
+          puts "Busted!"
+          break
+        end
       elsif a.upcase == "S"
         break
       else
@@ -29,7 +33,7 @@ class Game
 
   def dealer_turn
     while @game.score_calculator(@game.dealer) < 17
-      @game.dealer_hit
+      @game.hit(@game.dealer)
     end
   end
 
