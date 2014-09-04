@@ -19,15 +19,9 @@ class Deck
     @dealer = []
   end
 
-  def player_hit
+  def hit(hand)
     card = @deck.sample
-    @player << card
-    @deck.delete(card)
-  end
-
-  def dealer_hit
-    card = @deck.sample
-    @dealer << card
+    hand << card
     @deck.delete(card)
   end
 
